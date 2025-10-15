@@ -52,21 +52,21 @@
                     <!-- Stats Panel -->
                     <div class="stats-panel">
                         <div class="stat-card">
-                            <div class="stat-icon">🗺️</div>
+                            <div class="stat-icon">🏴‍☠️</div>
                             <div class="stat-info">
                                 <div class="stat-label">Your Territory</div>
                                 <div class="stat-value" id="yourTerritory">2.4 km²</div>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">👑</div>
+                            <div class="stat-icon">🎖️</div>
                             <div class="stat-info">
                                 <div class="stat-label">Local Rank</div>
                                 <div class="stat-value">#7</div>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">🔥</div>
+                            <div class="stat-icon">⚡</div>
                             <div class="stat-info">
                                 <div class="stat-label">Streak</div>
                                 <div class="stat-value">5 days</div>
@@ -91,9 +91,58 @@
                     <!-- Start Run Button -->
                     <div class="action-button-container">
                         <button id="startAnimation" class="start-run-btn">
-                            <span class="btn-icon">▶️</span>
+                            <span class="btn-icon">🏃‍♂️</span>
                             <span class="btn-text">Start Run</span>
                         </button>
+                    </div>
+                </div>
+
+                <!-- RUN MODE SECTION -->
+                <div id="run-section" class="tab-content">
+                    <!-- Full Screen Map -->
+                    <div class="run-map-container">
+                        <canvas id="runMapCanvas"></canvas>
+                        
+                        <!-- Top Run Stats Bar -->
+                        <div class="run-stats-bar">
+                            <div class="run-stat-item">
+                                <div class="run-stat-label">Territory Captured</div>
+                                <div class="run-stat-value highlight" id="runTerritory">0 m²</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Run Data -->
+                        <div class="run-data-panel">
+                            <div class="run-data-grid">
+                                <div class="run-data-item">
+                                    <div class="run-data-icon">📍</div>
+                                    <div class="run-data-content">
+                                        <div class="run-data-label">Distance</div>
+                                        <div class="run-data-value" id="runDistance">0.0 km</div>
+                                    </div>
+                                </div>
+                                <div class="run-data-item">
+                                    <div class="run-data-icon">⏱️</div>
+                                    <div class="run-data-content">
+                                        <div class="run-data-label">Time</div>
+                                        <div class="run-data-value" id="runTime">0:00</div>
+                                    </div>
+                                </div>
+                                <div class="run-data-item">
+                                    <div class="run-data-icon">⚡</div>
+                                    <div class="run-data-content">
+                                        <div class="run-data-label">Avg Pace</div>
+                                        <div class="run-data-value" id="runPace">-:--/km</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Stop Run Button -->
+                            <button id="stopRun" class="stop-run-btn">
+                                <span class="btn-icon">⏹️</span>
+                                <span class="btn-text">Stop Run</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -102,7 +151,7 @@
                     <!-- Hero Stats -->
                     <div class="hero-stats">
                         <div class="hero-stat-main">
-                            <div class="hero-stat-icon">🗺️</div>
+                            <div class="hero-stat-icon">🏴‍☠️</div>
                             <div class="hero-stat-content">
                                 <div class="hero-stat-value">8.7 km²</div>
                                 <div class="hero-stat-label">Territory Conquered</div>
@@ -111,11 +160,11 @@
                         
                         <div class="hero-stats-grid">
                             <div class="mini-hero-stat">
-                                <div class="mini-hero-value">👑 #7</div>
+                                <div class="mini-hero-value">🎖️ #7</div>
                                 <div class="mini-hero-label">Local Rank</div>
                             </div>
                             <div class="mini-hero-stat">
-                                <div class="mini-hero-value">🔥 5d</div>
+                                <div class="mini-hero-value">⚡ 5d</div>
                                 <div class="mini-hero-label">Streak</div>
                             </div>
                         </div>
@@ -123,7 +172,7 @@
                     
                     <!-- Performance Section -->
                     <div class="stats-section">
-                        <div class="stats-section-title">🏃 Performance</div>
+                        <div class="stats-section-title">💪 Performance</div>
                         <div class="performance-grid">
                             <div class="performance-card">
                                 <div class="perf-label">Distance</div>
@@ -149,14 +198,14 @@
                         <div class="battle-stats-list">
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">🏆</span>
+                                    <span class="battle-stat-icon">�</span>
                                     <span class="battle-stat-name">Battles Won</span>
                                 </div>
                                 <span class="battle-stat-value">23</span>
                             </div>
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">⚡</span>
+                                    <span class="battle-stat-icon">💥</span>
                                     <span class="battle-stat-name">Territories Captured</span>
                                 </div>
                                 <span class="battle-stat-value">47</span>
@@ -170,7 +219,7 @@
                             </div>
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">💪</span>
+                                    <span class="battle-stat-icon">�</span>
                                     <span class="battle-stat-name">Total Calories</span>
                                 </div>
                                 <span class="battle-stat-value">12,450</span>

@@ -2,7 +2,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navTabs = document.querySelectorAll('.nav-tab');
     const tabContents = document.querySelectorAll('.tab-content');
+    const startRunBtn = document.getElementById('startAnimation');
+    const stopRunBtn = document.getElementById('stopRun');
+    
+    let runInterval = null;
+    let runData = {
+        territory: 0,
+        distance: 0,
+        time: 0,
+        pace: 0
+    };
 
+    // Tab Navigation
     navTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetTab = tab.dataset.tab;
@@ -23,6 +34,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    
+    // Start Run Button
+    if (startRunBtn) {
+        startRunBtn.addEventListener('click', () => {
+            // Hide map section
+            const mapSection = document.getElementById('map-section');
+            if (mapSection) {
+                mapSection.classList.remove('active');
+            }
+            
+            // Show run section
+            const runSection = document.getElementById('run-section');
+            if (runSection) {
+                runSection.classList.add('active');
+            }
+            
+            // Reset and start run simulation
+            resetRunData();
+            startRunSimulation();
+        });
+    }
+    
+    // Stop Run Button
+    if (stopRunBtn) {
+        stopRunBtn.addEventListener('click', () => {
+            // Stop simulation
+            stopRunSimulation();
+            
+            // Hide run section
+            const runSection = document.getElementById('run-section');
+            if (runSection) {
+                runSection.classList.remove('active');
+            }
+            
+            // Show map section
+            const mapSection = document.getElementById('map-section');
+            if (mapSection) {
+                mapSection.classList.add('active');
+            }
+        });
+    }
+    
+    function resetRunData() {
+        runData = {
+            territory: 0,
+            distance: 0,
+            time: 0,
+            pace: 0
+        };
+        updateRunDisplay();
+    }
+    
+    function startRunSimulation() {
+        runInterval = setInterval(() => {
+            // Increment time (every second)
+            runData.time += 1;
+            
+            // Increment distance (simulate ~5:30/km pace, so ~0.18 km per minute, ~0.003 km per second)
+            runData.distance += 0.003;
+            
+            // Calculate pace (min/km)
+            if (runData.distance > 0) {
+                runData.pace = runData.time / 60 / runData.distance;
+            }
+            
+            // Territory remains at 0 (not capturing during demo)
+            // runData.territory stays at 0
+            
+            updateRunDisplay();
+        }, 1000); // Update every second
+    }
+    
+    function stopRunSimulation() {
+        if (runInterval) {
+            clearInterval(runInterval);
+            runInterval = null;
+        }
+    }
+    
+    function updateRunDisplay() {
+        // Update Territory (most important!)
+        const territoryEl = document.getElementById('runTerritory');
+        if (territoryEl) {
+            territoryEl.textContent = `${Math.round(runData.territory).toLocaleString()} m²`;
+        }
+        
+        // Update Distance
+        const distanceEl = document.getElementById('runDistance');
+        if (distanceEl) {
+            distanceEl.textContent = `${runData.distance.toFixed(2)} km`;
+        }
+        
+        // Update Time
+        const timeEl = document.getElementById('runTime');
+        if (timeEl) {
+            const minutes = Math.floor(runData.time / 60);
+            const seconds = runData.time % 60;
+            timeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Update Pace
+        const paceEl = document.getElementById('runPace');
+        if (paceEl) {
+            if (runData.pace > 0) {
+                const paceMin = Math.floor(runData.pace);
+                const paceSec = Math.floor((runData.pace - paceMin) * 60);
+                paceEl.textContent = `${paceMin}:${paceSec.toString().padStart(2, '0')}/km`;
+            } else {
+                paceEl.textContent = '-:--/km';
+            }
+        }
+    }
 });
 
 // Smooth scroll for navigation links

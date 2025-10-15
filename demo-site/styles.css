@@ -83,12 +83,27 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;backgr
     box-sizing: border-box;
 }
 
+/* Apple Font Optimization */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 115%; /* Increase all fonts by 15% */
+}
+
+/* SF Pro features for numbers */
+.hero-stat-value,
+.perf-value,
+.mini-hero-value,
+.battle-stat-value,
+.stat-value,
+.large-stat-value {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
 }
 
 /* Navigation */
@@ -376,7 +391,7 @@ body {
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    background-image: url('../map.png');
+    background-image: url('../zones.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -715,6 +730,143 @@ body {
 .nav-tab.active .tab-icon {
     transform: scale(1.1);
     filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+
+/* RUN MODE SECTION */
+.run-map-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../zones.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#runMapCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.run-stats-bar {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+    backdrop-filter: blur(10px);
+    padding: 20px 20px 15px;
+    border-bottom: 2px solid #00d4ff;
+}
+
+.run-stat-item {
+    text-align: center;
+}
+
+.run-stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.run-stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.run-stat-value.highlight {
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.run-data-panel {
+    margin-top: auto;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    padding: 20px 15px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.run-data-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.run-data-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px 8px;
+}
+
+.run-data-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.run-data-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.run-data-label {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+.run-data-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #00d4ff;
+    font-variant-numeric: tabular-nums;
+}
+
+.stop-run-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff4433 0%, #cc0000 100%);
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 68, 51, 0.5);
+    transition: all 0.3s;
+}
+
+.stop-run-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(255, 68, 51, 0.7);
+}
+
+.stop-run-btn:active {
+    transform: translateY(0);
+}
+
+.stop-run-btn .btn-icon {
+    font-size: 1.2rem;
+}
+
+.stop-run-btn .btn-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
 }
 
 /* Tab Content Sections */
@@ -1684,21 +1836,37 @@ body {
     opacity: 0;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
+@keyframes swipeShine {
+    0% {
+        left: -100%;
     }
-    50% {
-        transform: scale(1.05);
+    100% {
+        left: 100%;
     }
 }
 
 .start-run-btn {
-    animation: pulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
 }
 
-.start-run-btn:hover {
-    animation: none;
+.start-run-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+    animation: swipeShine 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.start-run-btn:hover::before {
+    animation-play-state: paused;
 }
 
 /* Smooth Scrolling */
