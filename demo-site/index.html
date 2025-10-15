@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Theft Cardio - iPhone Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="phone-mockup">
+        <!-- iPhone Notch -->
+        <div class="phone-notch"></div>
+        
+        <!-- iPhone Screen Content -->
+        <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span class="time">9:41</span>
+                <div class="status-icons">
+                    <span class="signal">📶</span>
+                    <span class="wifi">📡</span>
+                    <span class="battery">🔋</span>
+                </div>
+            </div>
+            
+            <!-- App Header -->
+            <div class="app-header">
+                <div class="app-logo-center">
+                    <img src="../image.png" alt="Grand Theft Cardio" class="logo-image">
+                </div>
+                <button class="profile-btn">
+                    <span class="profile-icon">👤</span>
+                </button>
+            </div>
+            
+            <!-- Content Sections -->
+            <div class="content-wrapper">
+                <!-- MAP SECTION -->
+                <div id="map-section" class="tab-content active">
+                    <!-- Territory Map Canvas -->
+                    <div class="map-container">
+                        <canvas id="mapCanvas"></canvas>
+                        
+                        <!-- Map Controls -->
+                        <div class="map-controls">
+                            <button class="map-btn">🎯</button>
+                            <button class="map-btn">➕</button>
+                            <button class="map-btn">➖</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Panel -->
+                    <div class="stats-panel">
+                        <div class="stat-card">
+                            <div class="stat-icon">🗺️</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Your Territory</div>
+                                <div class="stat-value" id="yourTerritory">2.4 km²</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👑</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Local Rank</div>
+                                <div class="stat-value">#7</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Streak</div>
+                                <div class="stat-value">5 days</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Daily Objective -->
+                    <div class="daily-objective">
+                        <div class="objective-header">
+                            <div class="objective-title">
+                                <span class="objective-icon">🎯</span>
+                                <span class="objective-text">Daily Goal</span>
+                            </div>
+                            <div class="objective-progress-text">6.5 / 10 km</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Start Run Button -->
+                    <div class="action-button-container">
+                        <button id="startAnimation" class="start-run-btn">
+                            <span class="btn-icon">▶️</span>
+                            <span class="btn-text">Start Run</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATS SECTION -->
+                <div id="stats-section" class="tab-content">
+                    <!-- Hero Stats -->
+                    <div class="hero-stats">
+                        <div class="hero-stat-main">
+                            <div class="hero-stat-icon">🗺️</div>
+                            <div class="hero-stat-content">
+                                <div class="hero-stat-value">8.7 km²</div>
+                                <div class="hero-stat-label">Territory Conquered</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-stats-grid">
+                            <div class="mini-hero-stat">
+                                <div class="mini-hero-value">👑 #7</div>
+                                <div class="mini-hero-label">Local Rank</div>
+                            </div>
+                            <div class="mini-hero-stat">
+                                <div class="mini-hero-value">🔥 5d</div>
+                                <div class="mini-hero-label">Streak</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Performance Section -->
+                    <div class="stats-section">
+                        <div class="stats-section-title">🏃 Performance</div>
+                        <div class="performance-grid">
+                            <div class="performance-card">
+                                <div class="perf-label">Distance</div>
+                                <div class="perf-value">127.5 km</div>
+                                <div class="perf-trend">↗ +12.3 km this week</div>
+                            </div>
+                            <div class="performance-card">
+                                <div class="perf-label">Time</div>
+                                <div class="perf-value">18h 34m</div>
+                                <div class="perf-trend">↗ +2h 15m this week</div>
+                            </div>
+                            <div class="performance-card">
+                                <div class="perf-label">Avg Pace</div>
+                                <div class="perf-value">5:42/km</div>
+                                <div class="perf-trend">↗ 8s faster</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle Stats Section -->
+                    <div class="stats-section">
+                        <div class="stats-section-title">⚔️ Battle Stats</div>
+                        <div class="battle-stats-list">
+                            <div class="battle-stat-item">
+                                <div class="battle-stat-left">
+                                    <span class="battle-stat-icon">🏆</span>
+                                    <span class="battle-stat-name">Battles Won</span>
+                                </div>
+                                <span class="battle-stat-value">23</span>
+                            </div>
+                            <div class="battle-stat-item">
+                                <div class="battle-stat-left">
+                                    <span class="battle-stat-icon">⚡</span>
+                                    <span class="battle-stat-name">Territories Captured</span>
+                                </div>
+                                <span class="battle-stat-value">47</span>
+                            </div>
+                            <div class="battle-stat-item">
+                                <div class="battle-stat-left">
+                                    <span class="battle-stat-icon">�️</span>
+                                    <span class="battle-stat-name">Territories Defended</span>
+                                </div>
+                                <span class="battle-stat-value">31</span>
+                            </div>
+                            <div class="battle-stat-item">
+                                <div class="battle-stat-left">
+                                    <span class="battle-stat-icon">💪</span>
+                                    <span class="battle-stat-name">Total Calories</span>
+                                </div>
+                                <span class="battle-stat-value">12,450</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RANKS SECTION -->
+                <div id="ranks-section" class="tab-content">
+                    <div class="section-title">👑 Leaderboard</div>
+                    
+                    <div class="leaderboard">
+                        <div class="rank-item podium gold">
+                            <div class="rank-position">🥇</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">J</div>
+                            <div class="rank-info">
+                                <div class="rank-name">John_Runner</div>
+                                <div class="rank-territory">15.3 km²</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rank-item podium silver">
+                            <div class="rank-position">🥈</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #c0c0c0, #e8e8e8);">S</div>
+                            <div class="rank-info">
+                                <div class="rank-name">Sarah_Speed</div>
+                                <div class="rank-territory">12.8 km²</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rank-item podium bronze">
+                            <div class="rank-position">🥉</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #cd7f32, #e6a157);">A</div>
+                            <div class="rank-info">
+                                <div class="rank-name">Alex_Fast</div>
+                                <div class="rank-territory">10.1 km²</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rank-item">
+                            <div class="rank-position">#4</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">E</div>
+                            <div class="rank-info">
+                                <div class="rank-name">Emma_Cardio</div>
+                                <div class="rank-territory">9.5 km²</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rank-item">
+                            <div class="rank-position">#5</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">L</div>
+                            <div class="rank-info">
+                                <div class="rank-name">Lisa_Warrior</div>
+                                <div class="rank-territory">9.2 km²</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rank-item">
+                            <div class="rank-position">#6</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">D</div>
+                            <div class="rank-info">
+                                <div class="rank-name">David_King</div>
+                                <div class="rank-territory">8.9 km²</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rank-item you">
+                            <div class="rank-position">#7</div>
+                            <div class="rank-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">M</div>
+                            <div class="rank-info">
+                                <div class="rank-name">Marco (You)</div>
+                                <div class="rank-territory">2.7 km²</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SOCIAL SECTION -->
+                <div id="social-section" class="tab-content">
+                    <div class="section-title">👥 Players Nearby</div>
+                    
+                    <div class="social-list">
+                        <div class="social-item">
+                            <div class="social-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">M</div>
+                            <div class="social-info">
+                                <div class="social-name">Mike_Runner</div>
+                                <div class="social-status">🟢 Running now - 2.1 km</div>
+                            </div>
+                            <button class="social-action">Challenge</button>
+                        </div>
+                        
+                        <div class="social-item">
+                            <div class="social-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">A</div>
+                            <div class="social-info">
+                                <div class="social-name">Anna_Fast</div>
+                                <div class="social-status">🟢 Running now - 1.5 km</div>
+                            </div>
+                            <button class="social-action">Challenge</button>
+                        </div>
+                        
+                        <div class="social-item">
+                            <div class="social-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">T</div>
+                            <div class="social-info">
+                                <div class="social-name">Tom_Warrior</div>
+                                <div class="social-status">⚪ Last run: 2h ago</div>
+                            </div>
+                            <button class="social-action">View</button>
+                        </div>
+                        
+                        <div class="social-item">
+                            <div class="social-avatar" style="background: linear-gradient(135deg, #fa709a, #fee140);">K</div>
+                            <div class="social-info">
+                                <div class="social-name">Kate_Speed</div>
+                                <div class="social-status">⚪ Last run: 5h ago</div>
+                            </div>
+                            <button class="social-action">View</button>
+                        </div>
+                        
+                        <div class="social-item">
+                            <div class="social-avatar" style="background: linear-gradient(135deg, #30cfd0, #330867);">R</div>
+                            <div class="social-info">
+                                <div class="social-name">Ryan_King</div>
+                                <div class="social-status">⚪ Last run: 1 day ago</div>
+                            </div>
+                            <button class="social-action">View</button>
+                        </div>
+                    </div>
+                    
+                    <div class="section-subtitle">🏆 Recent Challenges</div>
+                    
+                    <div class="challenges-list">
+                        <div class="challenge-item">
+                            <div class="challenge-info">
+                                <div class="challenge-name">Weekend Distance Battle</div>
+                                <div class="challenge-details">Beat 50km this weekend</div>
+                            </div>
+                            <div class="challenge-reward">🏅 +500 XP</div>
+                        </div>
+                        
+                        <div class="challenge-item">
+                            <div class="challenge-info">
+                                <div class="challenge-name">Territory Conquest</div>
+                                <div class="challenge-details">Capture 5km² new territory</div>
+                            </div>
+                            <div class="challenge-reward">👑 +250 XP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Navigation Bar -->
+            <div class="bottom-nav">
+                <button class="nav-tab active" data-tab="map">
+                    <span class="tab-icon">🗺️</span>
+                    <span class="tab-label">Map</span>
+                </button>
+                <button class="nav-tab" data-tab="stats">
+                    <span class="tab-icon">📊</span>
+                    <span class="tab-label">Stats</span>
+                </button>
+                <button class="nav-tab" data-tab="ranks">
+                    <span class="tab-icon">👑</span>
+                    <span class="tab-label">Ranks</span>
+                </button>
+                <button class="nav-tab" data-tab="social">
+                    <span class="tab-icon">👥</span>
+                    <span class="tab-label">Social</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="map-animation.js"></script>
+</body>
+</html>
+                            <div class="stat-icon">🗺️</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Your Territory</div>
+                                <div class="stat-value" id="yourTerritory">2.4 km²</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👑</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Local Rank</div>
+                                <div class="stat-value">#7</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Streak</div>
+                                <div class="stat-value">5 days</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nearby Players -->
+                    <div class="nearby-section">
+                        <div class="section-header">
+                            <h3>🎮 Active Players Nearby</h3>
+                            <span class="badge">4 online</span>
+                        </div>
+                        <div class="players-list">
+                            <div class="player-item">
+                                <div class="player-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">M</div>
+                                <div class="player-info">
+                                    <div class="player-name">Marco_Runner</div>
+                                    <div class="player-stats">3.2 km² • 2km away</div>
+                                </div>
+                                <div class="player-badge enemy">⚔️</div>
+                            </div>
+                            <div class="player-item">
+                                <div class="player-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">S</div>
+                                <div class="player-info">
+                                    <div class="player-name">Sara_Speedster</div>
+                                    <div class="player-stats">5.1 km² • 1.2km away</div>
+                                </div>
+                                <div class="player-badge enemy">⚔️</div>
+                            </div>
+                            <div class="player-item">
+                                <div class="player-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">L</div>
+                                <div class="player-info">
+                                    <div class="player-name">Luca_Lightning</div>
+                                    <div class="player-stats">1.8 km² • 3km away</div>
+                                </div>
+                                <div class="player-badge ally">🤝</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Action Button -->
+                    <div class="action-container">
+                        <button id="startRunButton" class="start-run-btn">
+                            <span class="btn-icon">🏃‍♂️</span>
+                            <span class="btn-text">Start Run</span>
+                            <span class="btn-hint">Tap to conquer territory</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Bottom Navigation -->
+                    <div class="bottom-nav">
+                        <div class="nav-item active">
+                            <span class="nav-icon">🗺️</span>
+                            <span class="nav-label">Map</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">Stats</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">🏆</span>
+                            <span class="nav-label">Ranks</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-label">Social</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- iPhone Home Indicator -->
+                <div class="phone-home-indicator"></div>
+            </div>
+            
+            <!-- Animation Controls (Outside Phone) -->
+            <div class="animation-controls">
+                <button id="startAnimation" class="btn btn-primary btn-small">▶ Simulate Run</button>
+                <button id="resetAnimation" class="btn btn-secondary btn-small">↻ Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section id="demo" class="demo-section">
+        <div class="section-container">
+            <h2 class="section-title">See It In Action</h2>
+            <p class="section-subtitle">
+                Watch our team conquering territory while running through the city
+            </p>
+            
+            <div class="video-grid">
+                <!-- Main Demo Video -->
+                <div class="video-card video-featured">
+                    <h3>Full App Demo</h3>
+                    <div class="video-wrapper">
+                        <!-- OPZIONE 1: Video locale (metti il file .mp4 nella cartella demo-site) -->
+                        <video controls poster="thumbnails/main-demo.jpg">
+                            <source src="videos/main-demo.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                        
+                        <!-- OPZIONE 2: Video da YouTube (sostituisci VIDEO_ID) -->
+                        <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe> -->
+                    </div>
+                    <p class="video-description">
+                        Complete walkthrough showing territory capture, real-time map updates, 
+                        and competitive gameplay during a 5km run through downtown.
+                    </p>
+                </div>
+
+                <!-- Additional Demo Videos -->
+                <div class="video-card">
+                    <h3>Pre-Run Setup</h3>
+                    <div class="video-wrapper">
+                        <video controls poster="thumbnails/pre-run.jpg">
+                            <source src="videos/pre-run-setup.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                    </div>
+                    <p class="video-description">
+                        How to plan your route, select game mode, and set territory objectives.
+                    </p>
+                </div>
+
+                <div class="video-card">
+                    <h3>During the Run</h3>
+                    <div class="video-wrapper">
+                        <video controls poster="thumbnails/running.jpg">
+                            <source src="videos/running-demo.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                    </div>
+                    <p class="video-description">
+                        Live territory capture, pace tracking, and real-time notifications.
+                    </p>
+                </div>
+
+                <div class="video-card">
+                    <h3>Post-Run Stats</h3>
+                    <div class="video-wrapper">
+                        <video controls poster="thumbnails/post-run.jpg">
+                            <source src="videos/post-run-stats.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                    </div>
+                    <p class="video-description">
+                        Detailed analytics, territory visualization, and achievement unlocks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Screenshots Gallery -->
+            <div class="screenshots-section">
+                <h3>App Screenshots</h3>
+                <div class="screenshots-grid">
+                    <img src="screenshots/map-view.jpg" alt="Map view with territories" class="screenshot">
+                    <img src="screenshots/run-stats.jpg" alt="Running stats interface" class="screenshot">
+                    <img src="screenshots/leaderboard.jpg" alt="Leaderboard rankings" class="screenshot">
+                    <img src="screenshots/achievements.jpg" alt="Achievements and badges" class="screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-container">
+            <h2 class="section-title">Core Features</h2>
+            <p class="section-subtitle">
+                Every mechanic designed to keep you motivated and moving
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Territory Conquest</h3>
+                    <p>Claim real geographic zones by running through them. Your territory, your rules.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Defense System</h3>
+                    <p>Defend your conquered territory from rival runners. Strategic planning meets cardio.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Adaptive Difficulty</h3>
+                    <p>Capture rates scale with your fitness level - always challenging, never overwhelming.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Alliances</h3>
+                    <p>Team up with 2-4 runners to control territory together and climb rankings.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Live Leaderboards</h3>
+                    <p>Monthly resets and all-time rankings. Local champions and global legends.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⌚</div>
+                    <h3>Smartwatch Ready</h3>
+                    <p>Full integration with Apple Watch, Garmin, Suunto, Polar, and Coros.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💓</div>
+                    <h3>Heart Rate Zones</h3>
+                    <p>Capture bonuses for staying in optimal cardio zones (65-85% HR max).</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Strategic Gameplay</h3>
+                    <p>High-value landmarks, territory decay, and unpredictable bonuses keep it fresh.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="section-container">
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Plan Your Route</h3>
+                        <p>Choose territories to conquer or defend. Select your game mode: Free Run, Defend, or Expansion.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Start Running</h3>
+                        <p>GPS tracks your movement. Every zone you run through gets captured and colored on the map.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Capture Territory</h3>
+                        <p>Your pace and heart rate determine capture speed. Faster pace = territory bonus multiplier.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Review & Share</h3>
+                        <p>See your conquered territory visualized. Track stats, climb leaderboards, sync with Strava.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Modes -->
+            <div class="game-modes">
+                <h3>Game Modes</h3>
+                <div class="modes-grid">
+                    <div class="mode-card">
+                        <h4>🚀 Expansion Mode</h4>
+                        <p>Focus on conquering new uncontrolled zones. 1.5× bonus for first captures.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h4>🛡️ Defend Mode</h4>
+                        <p>Reinforce your existing territory. Prevent rivals from stealing your zones.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h4>🏃 Free Run</h4>
+                        <p>Balanced mix of conquest and defense. Perfect for daily training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theory Section -->
+    <section id="theory" class="theory-section">
+        <div class="section-container">
+            <h2 class="section-title">Science-Backed Design</h2>
+            <p class="section-subtitle">
+                Built on established motivational psychology and exergame research
+            </p>
+
+            <div class="theory-grid">
+                <div class="theory-card">
+                    <h3>Dual-Flow Model</h3>
+                    <p><strong>Psychological Flow:</strong> Territory difficulty scales with fitness level to maintain optimal challenge.</p>
+                    <p><strong>Physiological Flow:</strong> Pace bonuses incentivize moderate-vigorous intensity (65-85% HR max).</p>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Self-Determination Theory</h3>
+                    <p><strong>Autonomy:</strong> No mandatory schedules - run when and where you want.</p>
+                    <p><strong>Competence:</strong> Adaptive challenges and clear progress visualization.</p>
+                    <p><strong>Relatedness:</strong> Asynchronous competition and alliance systems.</p>
+                </div>
+
+                <div class="theory-card">
+                    <h3>GameFlow Model</h3>
+                    <p>Minimalist UI for concentration during exercise, real-time feedback, scalable challenges, and clear goals.</p>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Malone's Framework</h3>
+                    <p><strong>Challenge:</strong> Dynamic defense formulas create uncertain outcomes.</p>
+                    <p><strong>Fantasy:</strong> Territorial conquest directly tied to physical performance.</p>
+                    <p><strong>Curiosity:</strong> Fog-of-war exploration and strategic depth.</p>
+                </div>
+            </div>
+
+            <div class="research-highlight">
+                <h3>Evidence-Based Approach</h3>
+                <ul>
+                    <li>✓ Addresses Pokémon GO's main quit reasons (slow progress, excessive time requirements)</li>
+                    <li>✓ Implements 7 proven game mechanics from exergame research</li>
+                    <li>✓ Territory decay creates natural commitment without rigid schedules</li>
+                    <li>✓ Infinite competition prevents completion burnout</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Conquer Your City?</h2>
+            <p>Join the territorial running revolution</p>
+            <div class="cta-buttons">
+                <a href="#demo" class="btn btn-primary btn-large">Watch Full Demo</a>
+                <a href="mailto:contact@grandtheftcardio.com" class="btn btn-secondary btn-large">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Grand Theft Cardio</h4>
+                <p>An exergame transforming outdoor running into territorial conquest.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Project</h4>
+                <p>Game+ Assignment 3<br>NTNU - Fall 2025</p>
+            </div>
+            <div class="footer-section">
+                <h4>Theory</h4>
+                <ul>
+                    <li>Dual-Flow Model</li>
+                    <li>Self-Determination Theory</li>
+                    <li>GameFlow Model</li>
+                    <li>Malone's Framework</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Grand Theft Cardio. Educational project.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="map-animation.js"></script>
+</body>
+</html>
