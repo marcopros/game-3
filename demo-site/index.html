@@ -17,9 +17,7 @@
             <div class="status-bar">
                 <span class="time">9:41</span>
                 <div class="status-icons">
-                    <span class="signal">📶</span>
-                    <span class="wifi">📡</span>
-                    <span class="battery">🔋</span>
+                    <img src="../applelogos.png" alt="Status icons" class="status-icons-img">
                 </div>
             </div>
             
@@ -29,7 +27,7 @@
                     <img src="../image.png" alt="Grand Theft Cardio" class="logo-image">
                 </div>
                 <button class="profile-btn">
-                    <span class="profile-icon">👤</span>
+                    <img src="../franklin.png" alt="Profile" class="profile-image">
                 </button>
             </div>
             
@@ -55,7 +53,7 @@
                             <div class="stat-icon">🏴‍☠️</div>
                             <div class="stat-info">
                                 <div class="stat-label">Your Territory</div>
-                                <div class="stat-value" id="yourTerritory">2.4 km²</div>
+                                <div class="stat-value" id="yourTerritory">1.7 km²</div>
                             </div>
                         </div>
                         <div class="stat-card">
@@ -81,7 +79,7 @@
                                 <span class="objective-icon">🎯</span>
                                 <span class="objective-text">Daily Goal</span>
                             </div>
-                            <div class="objective-progress-text">6.5 / 10 km</div>
+                            <div class="objective-progress-text">4.5 / 7 km</div>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 65%"></div>
@@ -108,6 +106,37 @@
                             <div class="run-stat-item">
                                 <div class="run-stat-label">Territory Captured</div>
                                 <div class="run-stat-value highlight" id="runTerritory">0 m²</div>
+                                
+                                <!-- Competitive Progress Bar -->
+                                <div class="territory-progress-container">
+                                    <div class="territory-progress-bar">
+                                        <!-- Scale markers -->
+                                        <div class="progress-scale">
+                                            <span class="scale-mark" style="left: 0%;">0</span>
+                                            <span class="scale-mark" style="left: 50%;">3.5 km²</span>
+                                            <span class="scale-mark" style="left: 100%;">7 km²</span>
+                                        </div>
+                                        
+                                        <!-- Competitor markers -->
+                                        <!-- David (#6) - 6.2 km² -->
+                                        <div class="competitor-marker" style="left: 89%;">
+                                            <div class="marker-dot competitor"></div>
+                                            <div class="marker-label">David<br>6.2 km²</div>
+                                        </div>
+                                        
+                                        <!-- You (#7) - 1.9 km² -->
+                                        <div class="competitor-marker you-marker" style="left: 27%;" id="yourMarker">
+                                            <div class="marker-dot you"></div>
+                                            <div class="marker-label">You<br><span id="markerTerritory">1.9 km²</span></div>
+                                        </div>
+                                        
+                                        <!-- Lisa (#8) - would be below you, so shows as motivation -->
+                                        <div class="competitor-marker" style="left: 15%;">
+                                            <div class="marker-dot competitor-below"></div>
+                                            <div class="marker-label">Lisa<br>1.1 km²</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -148,46 +177,24 @@
 
                 <!-- STATS SECTION -->
                 <div id="stats-section" class="tab-content">
-                    <!-- Hero Stats -->
-                    <div class="hero-stats">
-                        <div class="hero-stat-main">
-                            <div class="hero-stat-icon">🏴‍☠️</div>
-                            <div class="hero-stat-content">
-                                <div class="hero-stat-value">8.7 km²</div>
-                                <div class="hero-stat-label">Territory Conquered</div>
-                            </div>
-                        </div>
-                        
-                        <div class="hero-stats-grid">
-                            <div class="mini-hero-stat">
-                                <div class="mini-hero-value">🎖️ #7</div>
-                                <div class="mini-hero-label">Local Rank</div>
-                            </div>
-                            <div class="mini-hero-stat">
-                                <div class="mini-hero-value">⚡ 5d</div>
-                                <div class="mini-hero-label">Streak</div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- Performance Section -->
                     <div class="stats-section">
                         <div class="stats-section-title">💪 Performance</div>
                         <div class="performance-grid">
                             <div class="performance-card">
                                 <div class="perf-label">Distance</div>
-                                <div class="perf-value">127.5 km</div>
-                                <div class="perf-trend">↗ +12.3 km this week</div>
+                                <div class="perf-value">24 km</div>
+                                <div class="perf-trend">↗ +3.2 km this week</div>
                             </div>
                             <div class="performance-card">
                                 <div class="perf-label">Time</div>
-                                <div class="perf-value">18h 34m</div>
-                                <div class="perf-trend">↗ +2h 15m this week</div>
+                                <div class="perf-value">4h 18m</div>
+                                <div class="perf-trend">↗ +42m this week</div>
                             </div>
                             <div class="performance-card">
                                 <div class="perf-label">Avg Pace</div>
-                                <div class="perf-value">5:42/km</div>
-                                <div class="perf-trend">↗ 8s faster</div>
+                                <div class="perf-value">5:58/km</div>
+                                <div class="perf-trend">↗ 12s faster</div>
                             </div>
                         </div>
                     </div>
@@ -198,28 +205,28 @@
                         <div class="battle-stats-list">
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">�</span>
+                                    <span class="battle-stat-icon">⚔️</span>
                                     <span class="battle-stat-name">Battles Won</span>
                                 </div>
                                 <span class="battle-stat-value">23</span>
                             </div>
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">💥</span>
+                                    <span class="battle-stat-icon">🏴‍☠️</span>
                                     <span class="battle-stat-name">Territories Captured</span>
                                 </div>
                                 <span class="battle-stat-value">47</span>
                             </div>
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">�️</span>
+                                    <span class="battle-stat-icon">🛡️</span>
                                     <span class="battle-stat-name">Territories Defended</span>
                                 </div>
                                 <span class="battle-stat-value">31</span>
                             </div>
                             <div class="battle-stat-item">
                                 <div class="battle-stat-left">
-                                    <span class="battle-stat-icon">�</span>
+                                    <span class="battle-stat-icon">🔥</span>
                                     <span class="battle-stat-name">Total Calories</span>
                                 </div>
                                 <span class="battle-stat-value">12,450</span>
@@ -238,7 +245,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">J</div>
                             <div class="rank-info">
                                 <div class="rank-name">John_Runner</div>
-                                <div class="rank-territory">15.3 km²</div>
+                                <div class="rank-territory">10.7 km²</div>
                             </div>
                         </div>
                         
@@ -247,7 +254,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #c0c0c0, #e8e8e8);">S</div>
                             <div class="rank-info">
                                 <div class="rank-name">Sarah_Speed</div>
-                                <div class="rank-territory">12.8 km²</div>
+                                <div class="rank-territory">9.0 km²</div>
                             </div>
                         </div>
                         
@@ -256,7 +263,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #cd7f32, #e6a157);">A</div>
                             <div class="rank-info">
                                 <div class="rank-name">Alex_Fast</div>
-                                <div class="rank-territory">10.1 km²</div>
+                                <div class="rank-territory">7.1 km²</div>
                             </div>
                         </div>
                         
@@ -265,7 +272,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">E</div>
                             <div class="rank-info">
                                 <div class="rank-name">Emma_Cardio</div>
-                                <div class="rank-territory">9.5 km²</div>
+                                <div class="rank-territory">6.7 km²</div>
                             </div>
                         </div>
                         
@@ -274,7 +281,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">L</div>
                             <div class="rank-info">
                                 <div class="rank-name">Lisa_Warrior</div>
-                                <div class="rank-territory">9.2 km²</div>
+                                <div class="rank-territory">6.4 km²</div>
                             </div>
                         </div>
                         
@@ -283,7 +290,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">D</div>
                             <div class="rank-info">
                                 <div class="rank-name">David_King</div>
-                                <div class="rank-territory">8.9 km²</div>
+                                <div class="rank-territory">6.2 km²</div>
                             </div>
                         </div>
                         
@@ -292,7 +299,7 @@
                             <div class="rank-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">M</div>
                             <div class="rank-info">
                                 <div class="rank-name">Marco (You)</div>
-                                <div class="rank-territory">2.7 km²</div>
+                                <div class="rank-territory">1.9 km²</div>
                             </div>
                         </div>
                     </div>
@@ -355,7 +362,7 @@
                         <div class="challenge-item">
                             <div class="challenge-info">
                                 <div class="challenge-name">Weekend Distance Battle</div>
-                                <div class="challenge-details">Beat 50km this weekend</div>
+                                <div class="challenge-details">Beat 35km this weekend</div>
                             </div>
                             <div class="challenge-reward">🏅 +500 XP</div>
                         </div>
@@ -363,7 +370,7 @@
                         <div class="challenge-item">
                             <div class="challenge-info">
                                 <div class="challenge-name">Territory Conquest</div>
-                                <div class="challenge-details">Capture 5km² new territory</div>
+                                <div class="challenge-details">Capture 3.5km² new territory</div>
                             </div>
                             <div class="challenge-reward">👑 +250 XP</div>
                         </div>
@@ -430,7 +437,7 @@
                                 <div class="player-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">M</div>
                                 <div class="player-info">
                                     <div class="player-name">Marco_Runner</div>
-                                    <div class="player-stats">3.2 km² • 2km away</div>
+                                    <div class="player-stats">2.2 km² • 1.4km away</div>
                                 </div>
                                 <div class="player-badge enemy">⚔️</div>
                             </div>
@@ -438,7 +445,7 @@
                                 <div class="player-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">S</div>
                                 <div class="player-info">
                                     <div class="player-name">Sara_Speedster</div>
-                                    <div class="player-stats">5.1 km² • 1.2km away</div>
+                                    <div class="player-stats">3.6 km² • 0.8km away</div>
                                 </div>
                                 <div class="player-badge enemy">⚔️</div>
                             </div>
@@ -446,7 +453,7 @@
                                 <div class="player-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">L</div>
                                 <div class="player-info">
                                     <div class="player-name">Luca_Lightning</div>
-                                    <div class="player-stats">1.8 km² • 3km away</div>
+                                    <div class="player-stats">1.3 km² • 2.1km away</div>
                                 </div>
                                 <div class="player-badge ally">🤝</div>
                             </div>

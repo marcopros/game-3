@@ -287,14 +287,18 @@ body {
     padding: 10px 20px;
     padding-top: 18px;
     color: #fff;
-    font-size: 0.65rem;
+    font-size: 0.8 rem;
     font-weight: 600;
 }
 
 .status-icons {
     display: flex;
-    gap: 4px;
-    font-size: 0.6rem;
+    align-items: center;
+}
+
+.status-icons-img {
+    height: 33px;
+    opacity: 0.9;
 }
 
 /* App Header */
@@ -326,8 +330,8 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -344,6 +348,13 @@ body {
 
 .profile-icon {
     font-size: 0.9rem;
+}
+
+.profile-image {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .app-logo {
@@ -465,13 +476,13 @@ body {
 }
 
 .stat-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: #94a3b8;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .stat-value {
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #00d4ff;
 }
@@ -739,7 +750,7 @@ body {
     display: flex;
     flex-direction: column;
     background-image: url('../zones.png');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -784,6 +795,110 @@ body {
 .run-stat-value.highlight {
     color: #ffffff;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Territory Progress Bar with Competitors */
+.territory-progress-container {
+    margin-top: 15px;
+    padding: 0 10px;
+}
+
+.territory-progress-bar {
+    position: relative;
+    height: 50px;
+    background: transparent;
+    overflow: visible;
+}
+
+.territory-progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%);
+}
+
+.progress-scale {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+}
+
+.scale-mark {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+.competitor-marker {
+    position: absolute;
+    bottom: -5px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.competitor-marker.you-marker {
+    z-index: 20;
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 4px;
+}
+
+.marker-dot.you {
+    background: #00ff88; /* Verde */
+    width: 14px;
+    height: 14px;
+    border-width: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(0, 255, 136, 0.6);
+    animation: pulseDot 2s ease-in-out infinite;
+}
+
+.marker-dot.competitor {
+    background: #0066ff; /* Blu per David (sopra di te) */
+}
+
+.marker-dot.competitor-below {
+    background: #66d9ff; /* Azzurro per Lisa (sotto di te) */
+}
+
+.marker-label {
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    line-height: 1.2;
+    font-weight: 600;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.you-marker .marker-label {
+    color: #00ff88; /* Verde per il tuo label */
+    font-weight: 700;
+}
+
+@keyframes pulseDot {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
 }
 
 .run-data-panel {
@@ -983,31 +1098,100 @@ body {
     letter-spacing: 0.5px;
 }
 
-.hero-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+/* Stats Section - Simple Centered Design */
+.stats-simple {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
 }
 
-.mini-hero-stat {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 12px;
+.progress-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
-.mini-hero-value {
-    font-size: 1.2rem;
+.progress-percent {
+    font-size: 3rem;
     font-weight: 700;
     color: #00d4ff;
+    line-height: 1;
+}
+
+.progress-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.stats-cards {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 350px;
+    padding: 0 15px;
+}
+
+.stats-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stats-card.full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stats-card-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #00ff88;
     margin-bottom: 4px;
 }
 
-.mini-hero-label {
+.stats-card-value.small {
+    font-size: 0.95rem;
+}
+
+.stats-card-label {
     font-size: 0.65rem;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stats-card-sublabel {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.stats-icon {
+    font-size: 1.2rem;
+}
+
+.stats-card-content {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
 }
 
 /* Stats Sections */

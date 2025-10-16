@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function resetRunData() {
         runData = {
-            territory: 0,
+            territory: 1890000, // Start at 1.9 km² = 1,890,000 m² (2.7 km² - 30%)
             distance: 0,
             time: 0,
             pace: 0
@@ -99,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 runData.pace = runData.time / 60 / runData.distance;
             }
             
-            // Territory remains at 0 (not capturing during demo)
-            // runData.territory stays at 0
+            // Increment territory (simulate ~500 m²/s for realistic conquest)
+            runData.territory += 500;
             
             updateRunDisplay();
         }, 1000); // Update every second
@@ -116,8 +116,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateRunDisplay() {
         // Update Territory (most important!)
         const territoryEl = document.getElementById('runTerritory');
+        const territoryKm2 = runData.territory / 1000000; // Convert m² to km²
+        
         if (territoryEl) {
-            territoryEl.textContent = `${Math.round(runData.territory).toLocaleString()} m²`;
+            territoryEl.textContent = `${territoryKm2.toFixed(2)} km²`;
+        }
+        
+        // Update marker position on progress bar (0-7 km² scale)
+        const markerEl = document.getElementById('yourMarker');
+        const markerTerritoryEl = document.getElementById('markerTerritory');
+        if (markerEl && territoryKm2 > 0) {
+            const maxScale = 7; // 7 km² is 100% on the bar (reduced from 10)
+            const percentage = Math.min((territoryKm2 / maxScale) * 100, 100);
+            markerEl.style.left = `${percentage}%`;
+            
+            if (markerTerritoryEl) {
+                markerTerritoryEl.textContent = `${territoryKm2.toFixed(1)} km²`;
+            }
         }
         
         // Update Distance
