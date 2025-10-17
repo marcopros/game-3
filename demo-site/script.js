@@ -87,26 +87,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function startRunSimulation() {
-        runInterval = setInterval(() => {
-            // Increment time (every second)
-            runData.time += 1;
+        // Start the video with loop
+        const runVideo = document.getElementById('runVideo');
+        if (runVideo) {
+            runVideo.classList.add('active');
+            runVideo.loop = false; // Disable loop so it stops naturally
+            runVideo.play();
             
-            // Increment distance (simulate ~5:30/km pace, so ~0.18 km per minute, ~0.003 km per second)
-            runData.distance += 0.003;
+            // Monitor video time to stop counter 1.5 seconds before end
+            const checkVideoTime = setInterval(() => {
+                if (runVideo.duration && runVideo.currentTime >= runVideo.duration - 2) {
+                    stopRunSimulation();
+                    clearInterval(checkVideoTime);
+                }
+            }, 100); // Check every 100ms for accuracy
+        }
+        
+        let secondsElapsed = 0;
+        const targetTerritory = 4800000; // Target: 4.8 km² in m²
+        const startTerritory = 1890000;  // Start: 1.9 km² in m²
+        const territoryToGain = targetTerritory - startTerritory; // 2.91 km² to gain
+        
+        const baseIncrements = {
+            distance: 0.8,      // km increment
+            territory: territoryToGain / 13, // Distribute evenly over ~13 seconds to reach 4.8 km²
+            time: 480           // seconds increment to reach 2 hours (7200s) in 15 seconds
+        };
+        
+        runInterval = setInterval(() => {
+            secondsElapsed += 1;
+            
+            // Calculate multiplier: 25% increase per second for first 4 seconds
+            let multiplier = 1;
+            if (secondsElapsed <= 4) {
+                multiplier = 1 + (0.25 * secondsElapsed);
+            } else {
+                multiplier = 1 + (0.25 * 4); // Keep at 200% after 4 seconds
+            }
+            
+            // Increment time (faster to reach 2 hours)
+            runData.time += baseIncrements.time;
+            
+            // Increment distance (faster to match the time)
+            runData.distance += baseIncrements.distance;
             
             // Calculate pace (min/km)
             if (runData.distance > 0) {
                 runData.pace = runData.time / 60 / runData.distance;
             }
             
-            // Increment territory (simulate ~500 m²/s for realistic conquest)
-            runData.territory += 500;
+            // Increment territory gradually (no multiplier, steady increase to 4.8 km²)
+            runData.territory += baseIncrements.territory;
             
             updateRunDisplay();
+            
+            // Stop automatically when reaching 10 km or 2 hours (7200 seconds)
+            if (runData.distance >= 10 || runData.time >= 7200) {
+                stopRunSimulation();
+            }
         }, 1000); // Update every second
     }
     
     function stopRunSimulation() {
+        // Keep video visible but don't hide it
+        const runVideo = document.getElementById('runVideo');
+        if (runVideo) {
+            // Don't remove 'active' class or pause - let it stay on last frame
+            runVideo.loop = false; // Disable loop so it stops at the end
+        }
+        
         if (runInterval) {
             clearInterval(runInterval);
             runInterval = null;
@@ -135,18 +184,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Update Distance
+        // Update Distance (format: X.Y km)
         const distanceEl = document.getElementById('runDistance');
         if (distanceEl) {
-            distanceEl.textContent = `${runData.distance.toFixed(2)} km`;
+            distanceEl.textContent = `${runData.distance.toFixed(1)} km`;
         }
         
-        // Update Time
+        // Update Time (format: ORE:MINUTI)
         const timeEl = document.getElementById('runTime');
         if (timeEl) {
-            const minutes = Math.floor(runData.time / 60);
-            const seconds = runData.time % 60;
-            timeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            const hours = Math.floor(runData.time / 3600);
+            const minutes = Math.floor((runData.time % 3600) / 60);
+            timeEl.textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
         }
         
         // Update Pace
